@@ -11,8 +11,15 @@ public class MainTest {
         assertEquals("I", roman);
     }
 
+    @Test
+    public void convert_2_to_II() {
+        int input = 2;
+        String roman = convertRomanNumerals(input);
+        assertEquals("II",roman);
+    }
+
     private String convertRomanNumerals(int input) {
-        return null;
+        return "I";
     }
 
 }
