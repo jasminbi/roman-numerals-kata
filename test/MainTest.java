@@ -50,25 +50,24 @@ public class MainTest {
 
         String result = "";
 
-        if (input == 5) {
-            result = "V";
-
-        } else if (input % 10 == 0) {
-            String romanX = "X";
-            for (int i = 0; i < input; i += 10) {
-                result += romanX;
-            }
-
+        if (input % 10 == 0) {
+            result = composeRoman(input, result, "X", 10);
+        } else if (input % 5 == 0) {
+            result = composeRoman(input, result, "V", 5);
         } else {
-            String romanI = "I";
-            for (int i = 0; i < input; i++) {
-                result += romanI;
-            }
+            result = composeRoman(input, result, "I", 1);
         }
 
         return result;
 
 
+    }
+
+    private String composeRoman(int input, String result, String romanLetter, int divisor) {
+        for (int i = 0; i < input; i += divisor) {
+            result += romanLetter;
+        }
+        return result;
     }
 
 }
