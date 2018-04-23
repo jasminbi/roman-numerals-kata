@@ -18,8 +18,18 @@ public class MainTest {
         assertEquals("II",roman);
     }
 
+    @Test
+    public void convert_3_to_III() {
+        int input = 3;
+        String roman = convertRomanNumerals(input);
+        assertEquals("III", roman);
+    }
+
     private String convertRomanNumerals(int input) {
-        return "I";
+        if (input == 1) {
+            return "I";
+        }
+        return "II";
     }
 
 }
