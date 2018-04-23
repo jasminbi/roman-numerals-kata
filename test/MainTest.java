@@ -68,6 +68,13 @@ public class MainTest {
     }
 
     @Test
+    public void convert_50_to_L() {
+        int input = 50;
+        String roman = convertRomanNumerals(input);
+        assertEquals("L", roman);
+    }
+
+    @Test
     public void convert_100_to_C() {
         int input = 100;
         String roman = convertRomanNumerals(input);
@@ -82,6 +89,10 @@ public class MainTest {
         int wieOft100 = input /100;
         result += composeRoman(wieOft100, "C");
         int rest = input % 100;
+
+        int wieOft50 = rest /50;
+        rest %= 50;
+        result += composeRoman(wieOft50, "L");
 
         int wieOft10 = rest / 10;
         rest %= 10;
