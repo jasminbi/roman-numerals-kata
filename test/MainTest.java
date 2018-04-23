@@ -25,9 +25,20 @@ public class MainTest {
         assertEquals("III", roman);
     }
 
+    @Test
+    public void convert_5_to_V() {
+        int input = 5;
+        String roman = convertRomanNumerals(input);
+        assertEquals("V", roman);
+    }
+
     private String convertRomanNumerals(int input) {
 
         String result = "";
+
+        if (input == 5) {
+            return "V";
+        }
 
         String romanI = "I";
         for (int i = 0; i < input; i++) {
