@@ -26,10 +26,17 @@ public class MainTest {
     }
 
     private String convertRomanNumerals(int input) {
-        if (input == 1) {
-            return "I";
+
+        String result = "";
+
+        String romanI = "I";
+        for (int i = 0; i < input; i++) {
+            result += romanI;
         }
-        return "II";
+        return result;
+
+
+
     }
 
 }
