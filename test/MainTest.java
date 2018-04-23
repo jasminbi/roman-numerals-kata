@@ -1,4 +1,3 @@
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -54,19 +53,30 @@ public class MainTest {
         assertEquals("XI", roman);
     }
 
+    @Test
+    public void convert_6_to_VI() {
+        int input = 6;
+        String roman = convertRomanNumerals(input);
+        assertEquals("VI", roman);
+    }
+
+
     private String convertRomanNumerals(int input) {
 
         String result = "";
 
         if (input >= 10) {
             int wieOft10 = input / 10;
-            result += composeRoman(wieOft10, "X", 1);
+            result += composeRoman(wieOft10, "X");
             int wieOft1 = input % 10;
-            result += composeRoman(wieOft1, "I", 1);
-        } else if (input % 5 == 0) {
-            result += composeRoman(input, "V", 5);
+            result += composeRoman(wieOft1, "I");
+        } else if (input >= 5) {
+            int wieOft5 = input / 5;
+            result += composeRoman(wieOft5, "V");
+            int wieOft1 = input % 5;
+            result += composeRoman(wieOft1, "I");
         } else {
-            result += composeRoman(input, "I", 1);
+            result += composeRoman(input, "I");
         }
 
         return result;
@@ -74,9 +84,9 @@ public class MainTest {
 
     }
 
-    private String composeRoman(int limit, String romanLetter, int divisor) {
+    private String composeRoman(int limit, String romanLetter) {
         String toAdd = "";
-        for (int i = 0; i < limit; i += divisor) {
+        for (int i = 0; i < limit; i ++) {
             toAdd += romanLetter;
         }
         return toAdd;
