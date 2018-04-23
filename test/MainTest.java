@@ -1,5 +1,9 @@
 import org.junit.Test;
 
+import java.util.*;
+import java.util.Map.Entry;
+
+import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.*;
 
 public class MainTest {
@@ -98,34 +102,30 @@ public class MainTest {
 
     private String convertRomanNumerals(int zahl) {
 
+        Map<Integer, String> romanLetters = new HashMap<>();
+        romanLetters.put(1, "I");
+        romanLetters.put(5, "V");
+        romanLetters.put(10, "X");
+        romanLetters.put(50, "L");
+        romanLetters.put(100, "C");
+        romanLetters.put(500, "D");
+        romanLetters.put(1000, "M");
+
+
         String result = "";
+        Comparator<Entry<Integer, String>> comparing = Comparator.<Entry<Integer, String>, Integer>comparing(Entry::getKey).reversed();
+        List<Entry<Integer, String>> sortedRomanNumerals = romanLetters.entrySet().stream()
+                .sorted(comparing)
+                .collect(toList());
 
-        int wieOft1000 = zahl / 1000;
-        zahl %= 1000;
-        result += composeRoman(wieOft1000, "M");
 
-        int wieOft500 = zahl / 500;
-        zahl %= 500;
-        result += composeRoman(wieOft500, "D");
+        for (Entry<Integer, String> entry : sortedRomanNumerals
+                ) {
+            int wieOft = zahl / entry.getKey();
+            zahl %= entry.getKey();
+            result += composeRoman(wieOft, entry.getValue());
 
-        int wieOft100 = zahl / 100;
-        zahl %= 100;
-        result += composeRoman(wieOft100, "C");
-
-        int wieOft50 = zahl / 50;
-        zahl %= 50;
-        result += composeRoman(wieOft50, "L");
-
-        int wieOft10 = zahl / 10;
-        zahl %= 10;
-        result += composeRoman(wieOft10, "X");
-
-        int wieOft5 = zahl / 5;
-        zahl %= 5;
-        result += composeRoman(wieOft5, "V");
-
-        int wieOft1 = zahl / 1;
-        result += composeRoman(wieOft1, "I");
+        }
 
 
         return result;
