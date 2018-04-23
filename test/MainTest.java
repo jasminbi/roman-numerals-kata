@@ -67,16 +67,31 @@ public class MainTest {
         assertEquals("XVI", roman);
     }
 
+    @Test
+    public void convert_100_to_C() {
+        int input = 100;
+        String roman = convertRomanNumerals(input);
+        assertEquals("C", roman);
+    }
+
 
     private String convertRomanNumerals(int input) {
 
         String result = "";
 
-        int wieOft10 = input / 10;
+        int wieOft100 = input /100;
+        result += composeRoman(wieOft100, "C");
+        int rest = input % 100;
+
+        int wieOft10 = rest / 10;
+        rest %= 10;
         result += composeRoman(wieOft10, "X");
-        int wieOft5 = (input % 10) / 5;
+
+        int wieOft5 = rest / 5;
+        rest %= 5;
         result += composeRoman(wieOft5, "V");
-        int wieOft1 = (input % 10) % 5;
+
+        int wieOft1 = rest / 1;
         result += composeRoman(wieOft1, "I");
 
 
