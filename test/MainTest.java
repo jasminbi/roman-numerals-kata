@@ -81,28 +81,50 @@ public class MainTest {
         assertEquals("C", roman);
     }
 
+    @Test
+    public void convert_500_to_D() {
+        int input = 500;
+        String roman = convertRomanNumerals(input);
+        assertEquals("D", roman);
+    }
 
-    private String convertRomanNumerals(int input) {
+    @Test
+    public void convert_1000_to_M() {
+        int input = 1000;
+        String roman = convertRomanNumerals(input);
+        assertEquals("M", roman);
+    }
+
+
+    private String convertRomanNumerals(int zahl) {
 
         String result = "";
 
-        int wieOft100 = input /100;
-        result += composeRoman(wieOft100, "C");
-        int rest = input % 100;
+        int wieOft1000 = zahl / 1000;
+        zahl %= 1000;
+        result += composeRoman(wieOft1000, "M");
 
-        int wieOft50 = rest /50;
-        rest %= 50;
+        int wieOft500 = zahl / 500;
+        zahl %= 500;
+        result += composeRoman(wieOft500, "D");
+
+        int wieOft100 = zahl / 100;
+        zahl %= 100;
+        result += composeRoman(wieOft100, "C");
+
+        int wieOft50 = zahl / 50;
+        zahl %= 50;
         result += composeRoman(wieOft50, "L");
 
-        int wieOft10 = rest / 10;
-        rest %= 10;
+        int wieOft10 = zahl / 10;
+        zahl %= 10;
         result += composeRoman(wieOft10, "X");
 
-        int wieOft5 = rest / 5;
-        rest %= 5;
+        int wieOft5 = zahl / 5;
+        zahl %= 5;
         result += composeRoman(wieOft5, "V");
 
-        int wieOft1 = rest / 1;
+        int wieOft1 = zahl / 1;
         result += composeRoman(wieOft1, "I");
 
 
