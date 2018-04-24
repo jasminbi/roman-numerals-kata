@@ -101,6 +101,34 @@ public class MainTest {
         assertEquals("M", roman);
     }
 
+    @Test
+    public void convert_4_to_IV() {
+        int input = 4;
+        String roman = convertRomanNumerals(input);
+        assertEquals("IV",roman);
+    }
+
+    @Test
+    public void convert_9_to_IX() {
+        int input = 9;
+        String roman = convertRomanNumerals(input);
+        assertEquals("IX",roman);
+    }
+
+    @Test
+    public void convert_40_to_XL() {
+        int input = 40;
+        String roman = convertRomanNumerals(input);
+        assertEquals("XL",roman);
+    }
+
+    @Test
+    public void convert_90_to_XC() {
+        int input = 90;
+        String roman = convertRomanNumerals(input);
+        assertEquals("XC",roman);
+    }
+
 
     private String convertRomanNumerals(int zahl) {
 
@@ -133,9 +161,13 @@ public class MainTest {
         M(1000),
         D(500),
         C(100),
+        XC(90),
         L(50),
+        XL(40),
         X(10),
+        IX(9),
         V(5),
+        IV(4),
         I(1);
 
 
