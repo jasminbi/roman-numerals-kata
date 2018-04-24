@@ -105,28 +105,44 @@ public class MainTest {
     public void convert_4_to_IV() {
         int input = 4;
         String roman = convertRomanNumerals(input);
-        assertEquals("IV",roman);
+        assertEquals("IV", roman);
     }
 
     @Test
     public void convert_9_to_IX() {
         int input = 9;
         String roman = convertRomanNumerals(input);
-        assertEquals("IX",roman);
+        assertEquals("IX", roman);
     }
 
     @Test
     public void convert_40_to_XL() {
         int input = 40;
         String roman = convertRomanNumerals(input);
-        assertEquals("XL",roman);
+        assertEquals("XL", roman);
     }
 
     @Test
     public void convert_90_to_XC() {
         int input = 90;
         String roman = convertRomanNumerals(input);
-        assertEquals("XC",roman);
+        assertEquals("XC", roman);
+    }
+
+    @Test
+    public void convert_I_to_1() {
+        String input = "I";
+        int arabic = convertArabicNumerals(input);
+        assertEquals(1, arabic);
+    }
+
+
+    private int convertArabicNumerals(String input) {
+        int result = 0;
+
+        result += RomanNumeral.I.getArabicValue();
+
+        return result;
     }
 
 
@@ -136,10 +152,10 @@ public class MainTest {
         String result = "";
 
 
-        for (RomanNumeral entry : RomanNumeral.values()) {
-            int wieOft = zahl / entry.getArabicValue();
-            zahl %= entry.getArabicValue();
-            result += composeRoman(wieOft, entry.name());
+        for (RomanNumeral romanNumeral : RomanNumeral.values()) {
+            int wieOft = zahl / romanNumeral.getArabicValue();
+            zahl %= romanNumeral.getArabicValue();
+            result += composeRoman(wieOft, romanNumeral.name());
 
         }
 
