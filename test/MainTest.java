@@ -1,8 +1,10 @@
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.Map.Entry;
 
+import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.*;
 
@@ -102,28 +104,14 @@ public class MainTest {
 
     private String convertRomanNumerals(int zahl) {
 
-        Map<Integer, String> romanLetters = new HashMap<>();
-        romanLetters.put(1, "I");
-        romanLetters.put(5, "V");
-        romanLetters.put(10, "X");
-        romanLetters.put(50, "L");
-        romanLetters.put(100, "C");
-        romanLetters.put(500, "D");
-        romanLetters.put(1000, "M");
-
 
         String result = "";
-        Comparator<Entry<Integer, String>> comparing = Comparator.<Entry<Integer, String>, Integer>comparing(Entry::getKey).reversed();
-        List<Entry<Integer, String>> sortedRomanNumerals = romanLetters.entrySet().stream()
-                .sorted(comparing)
-                .collect(toList());
 
 
-        for (Entry<Integer, String> entry : sortedRomanNumerals
-                ) {
-            int wieOft = zahl / entry.getKey();
-            zahl %= entry.getKey();
-            result += composeRoman(wieOft, entry.getValue());
+        for (RomanNumeral entry : RomanNumeral.values()) {
+            int wieOft = zahl / entry.getArabicValue();
+            zahl %= entry.getArabicValue();
+            result += composeRoman(wieOft, entry.name());
 
         }
 
@@ -139,6 +127,28 @@ public class MainTest {
             toAdd += romanLetter;
         }
         return toAdd;
+    }
+
+    private enum RomanNumeral {
+        M(1000),
+        D(500),
+        C(100),
+        L(50),
+        X(10),
+        V(5),
+        I(1);
+
+
+        private final int arabicValue;
+
+        RomanNumeral(int arabicValue) {
+
+            this.arabicValue = arabicValue;
+        }
+
+        public int getArabicValue() {
+            return arabicValue;
+        }
     }
 
 }
