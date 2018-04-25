@@ -179,6 +179,43 @@ public class MainTest {
         assertEquals(11, arabic);
     }
 
+    @Test
+    public void convert_XC_to_90() {
+        String input = "XC";
+        int arabic = convertArabicNumerals(input);
+        assertEquals(90, arabic);
+    }
+
+    @Test
+    public void convert_XCI_to_91() {
+        String input = "XCI";
+        int arabic = convertArabicNumerals(input);
+        assertEquals(91, arabic);
+    }
+
+    @Test
+    public void convert_MMXIV_to_2014() {
+        String input = "MMXIV";
+        int arabic = convertArabicNumerals(input);
+        assertEquals(2014, arabic);
+    }
+
+    @Test
+    public void convert_XCV_to_95() {
+        String input = "XCV";
+        int arabic = convertArabicNumerals(input);
+        assertEquals(95, arabic);
+    }
+
+    @Test
+    public void convert_numbers_from_0_to_3000() {
+        for (int i=1; i<3000; i++) {
+            String roman = convertRomanNumerals(i);
+            int arabic = convertArabicNumerals(roman);
+            assertEquals(arabic,i);
+        }
+    }
+
 
 
 
@@ -192,7 +229,7 @@ public class MainTest {
             for (RomanNumeral romanNumeral : RomanNumeral.values()) {
                 if (input.startsWith(romanNumeral.name(), offset)) {
                     toAdd += romanNumeral.getArabicValue();
-                    offset++;
+                    offset+=romanNumeral.name().length();
                 }
             }
             result += toAdd;
