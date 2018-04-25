@@ -1,3 +1,4 @@
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.lang.reflect.Array;
@@ -136,13 +137,61 @@ public class MainTest {
         assertEquals(1, arabic);
     }
 
+    @Test
+    public void convert_V_to_5() {
+        String input = "V";
+        int arabic = convertArabicNumerals(input);
+        assertEquals(5, arabic);
+    }
+
+    @Test
+    public void convert_X_to_10() {
+        String input = "X";
+        int arabic = convertArabicNumerals(input);
+        assertEquals(10, arabic);
+    }
+
+    @Test
+    public void convert_II_to_2() {
+        String input = "II";
+        int arabic = convertArabicNumerals(input);
+        assertEquals(2, arabic);
+    }
+
+    @Test
+    public void convert_III_to_3() {
+        String input = "III";
+        int arabic = convertArabicNumerals(input);
+        assertEquals(3, arabic);
+    }
+
+    @Test
+    public void convert_XX_to_20() {
+        String input = "XX";
+        int arabic = convertArabicNumerals(input);
+        assertEquals(20, arabic);
+    }
+
 
     private int convertArabicNumerals(String input) {
         int result = 0;
 
-        result += RomanNumeral.I.getArabicValue();
+
+        for (int i=0;i<input.length();i++) {
+            if (input.charAt(i) == 'I') {
+                result += 1;
+            } else if (input.charAt(i) == 'V') {
+                result += 5;
+            } else if (input.charAt(i) == 'X') {
+                result += 10;
+            }
+        }
+
+
+
 
         return result;
+
     }
 
 
