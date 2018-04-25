@@ -172,27 +172,39 @@ public class MainTest {
         assertEquals(20, arabic);
     }
 
+    @Test
+    public void convert_L_to_50() {
+        String input = "L";
+        int arabic = convertArabicNumerals(input);
+        assertEquals(50, arabic);
+    }
+
 
     private int convertArabicNumerals(String input) {
         int result = 0;
 
 
         for (int i=0;i<input.length();i++) {
-            if (input.charAt(i) == 'I') {
-                result += 1;
-            } else if (input.charAt(i) == 'V') {
-                result += 5;
-            } else if (input.charAt(i) == 'X') {
-                result += 10;
-            }
+            result += getToAdd(input, i);
         }
-
-
 
 
         return result;
 
     }
+
+    private int getToAdd(String input, int i) {
+        int toAdd = 0;
+        for (RomanNumeral romanNumeral : RomanNumeral.values()) {
+            if (("" + input.charAt(i)).equals(romanNumeral.name())) {
+                toAdd = romanNumeral.getArabicValue();
+            }
+        }
+        return toAdd;
+    }
+
+
+
 
 
     private String convertRomanNumerals(int zahl) {
