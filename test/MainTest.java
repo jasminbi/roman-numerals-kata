@@ -1,12 +1,5 @@
-import org.junit.Ignore;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
-import java.util.*;
-import java.util.Map.Entry;
-
-import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.*;
 
 public class MainTest {
@@ -179,32 +172,36 @@ public class MainTest {
         assertEquals(50, arabic);
     }
 
+    @Test
+    public void convert_XI_to_11() {
+        String input = "XI";
+        int arabic = convertArabicNumerals(input);
+        assertEquals(11, arabic);
+    }
+
+
+
 
     private int convertArabicNumerals(String input) {
         int result = 0;
+        int offset = 0;
 
 
-        for (int i=0;i<input.length();i++) {
-            result += getToAdd(input, i);
+        for (int i = 0; i < input.length(); i++) {
+            int toAdd = 0;
+            for (RomanNumeral romanNumeral : RomanNumeral.values()) {
+                if (input.startsWith(romanNumeral.name(), offset)) {
+                    toAdd += romanNumeral.getArabicValue();
+                    offset++;
+                }
+            }
+            result += toAdd;
         }
 
 
         return result;
 
     }
-
-    private int getToAdd(String input, int i) {
-        int toAdd = 0;
-        for (RomanNumeral romanNumeral : RomanNumeral.values()) {
-            if (("" + input.charAt(i)).equals(romanNumeral.name())) {
-                toAdd = romanNumeral.getArabicValue();
-            }
-        }
-        return toAdd;
-    }
-
-
-
 
 
     private String convertRomanNumerals(int zahl) {
